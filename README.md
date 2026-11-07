@@ -8,16 +8,24 @@ DSH バンドルプラグインです。
 `principle-*` 24 本を含む **57 スキル**を `ctx.skills` に登録します。ランタイム依存ゼロ
 （Node 内蔵モジュールのみ・ビルド不要）。
 
+> **非公式ポートです。** Cursor（Anysphere）および DeepSeek Harness の公式プロジェクトではありません。
+> 上流 pstack は MIT ライセンス（Copyright Lauren Tan、`LICENSE` 参照）で、
+> 上流ファイルは無変更で同梱しています。来歴は [UPSTREAM.md](UPSTREAM.md)。
+
 ## インストール
 
 ```sh
-# 開発スタイル（推奨）: このチェックアウトへ symlink。スキル本文の編集が再起動なしで反映される
-dsh plugin --profile web add link:/Users/example/git/pstck-dsh
+git clone https://github.com/NagasakaH/pstack-dsh.git   # 任意の場所へ
+```
+
+```sh
+# 開発スタイル（推奨）: クローンしたチェックアウトへ symlink。スキル本文の編集が再起動なしで反映される
+dsh plugin --profile web add link:/path/to/pstack-dsh
 ```
 
 ```sh
 # スナップショットコピーで入れる場合
-dsh plugin --profile web add file:/Users/example/git/pstck-dsh
+dsh plugin --profile web add file:/path/to/pstack-dsh
 ```
 
 `dsh bundle` は `package.json` の `dsh.bundle.patch` を読み、`cordis.patch.yml` の

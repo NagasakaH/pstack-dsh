@@ -1,5 +1,8 @@
 # Upstream provenance / 上流の来歴
 
+このリポジトリ [NagasakaH/pstack-dsh](https://github.com/NagasakaH/pstack-dsh) は、
+下記上流の **非公式 DSH ポート** です。
+
 | 項目 | 値 |
 | --- | --- |
 | 上流リポジトリ | [cursor/plugins](https://github.com/cursor/plugins) — `pstack/` ディレクトリ |
