@@ -1,0 +1,6 @@
+# プロファイルレイヤー。この Loader 行で pstack スキル・プロバイダを起動に組み込む。
+# pstack のスキルは disable-model-invocation: true が既定なので、
+# ユーザーが /poteto-mode のようにスラッシュで起動すると本文が注入される。
+- insert:
+    - id: pstack-skills
+      name: dsh-pstack

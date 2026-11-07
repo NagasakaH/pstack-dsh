@@ -1,0 +1,54 @@
+{
+  "name": "dsh-pstack",
+  "version": "0.15.36",
+  "description": "pstack（cursor/plugins のエージェント用スキル集）を DSH のスキルとして提供するバンドル。poteto-mode, tdd, how, why, unslop, principle-* など 57 スキル。",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.1-rc.5 <1"
+  },
+  "files": [
+    "lib",
+    "skills",
+    "agents",
+    "docs",
+    "assets",
+    "cordis.patch.yml",
+    "README.md",
+    "PORTING.md",
+    "LICENSE",
+    "UPSTREAM.md"
+  ],
+  "scripts": {
+    "sync-upstream": "bash scripts/sync-upstream.sh",
+    "test": "node scripts/test-provider.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "dsh-skill",
+    "pstack",
+    "poteto-mode",
+    "workflow",
+    "principles",
+    "unslop"
+  ],
+  "license": "MIT",
+  "author": "Lauren Tan (upstream cursor/plugins) / dsh port",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cursor/plugins.git",
+    "directory": "pstack"
+  },
+  "homepage": "https://github.com/cursor/plugins/tree/main/pstack"
+}

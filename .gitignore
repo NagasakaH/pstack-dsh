@@ -1,0 +1,4 @@
+# 上流クローン（scripts/sync-upstream.sh が管理）。リポジトリには入れない
+/vendor-src/
+node_modules/
+.DS_Store
