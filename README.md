@@ -50,73 +50,74 @@ pstack のスキルは上流どおり全 57 本が `disable-model-invocation: tr
 
 ## スキル一覧
 
-57 本の一覧です。説明は上流 frontmatter の英文をそのまま載せています。
-Cursor 専用のセットアップスキル `setup-pstack` は同梱しますが、DSH では
-スキルとして登録しません（`~/.cursor/rules` への書き込みなど DSH で誤動作する
-ため。`skills/` には残っています）。
+57 本の一覧です。説明は上流 frontmatter の英文を日本語に直したもので、原文は
+各スキルの `SKILL.md` にあります。Cursor 専用のセットアップスキル
+`setup-pstack` は同梱しますが、DSH ではスキルとして登録しません
+（`~/.cursor/rules` への書き込みなど DSH で誤動作するため。`skills/` には
+残っています）。
 
 ### ハブ・モード
 
 | スキル | 説明 |
 | --- | --- |
-| `poteto-mode` | poteto's agent style for concise, detailed responses, deliberate subagents, unslopped prose, simple code, and verified work. Use for poteto, /poteto-mode, or requests to work in this style. |
-| `poteto-help` | Guides users through pstack setup, /poteto-mode, and picking the skill, playbook, or principle for a task. Type /poteto-help with a question. |
-| `automate-me` | Use for "automate me", "create/update/refresh my -mode skill", "turn/capture my preferences or working style into a skill", or wanting agents to follow how the user works. Drafts or revises a personal -mode skill via create-skill + unslop, optionally pulling fresh evidence from recent transcripts. |
-| `figure-it-out` | Design an auditable playbook when no narrower one fits: a large migration, an ambitious multi-part change, or work a human reviews after stepping away. Scales rigor to the task, runs a hypothesis loop, and logs decisions. Use for /figure-it-out or 'figure it out'. |
+| `poteto-mode` | poteto のエージェント流儀。簡潔で詳細な返答、意図的なサブエージェント運用、AI の癖を削った文章、シンプルなコード、検証済みの作業。poteto、/poteto-mode、「この流儀で作業して」と言われたときに使う。 |
+| `poteto-help` | pstack のセットアップ、/poteto-mode、タスクに対してスキル・プレイブック・原則のどれを選ぶかを案内する。質問を /poteto-help に続けて書く。 |
+| `automate-me` | 「automate me」「自分の -mode スキルを作る／更新する」「好みや作業スタイルをスキルに残す」といった依頼に使う。最近のトランスクリプトを根拠に、パーソナル -mode スキルを create-skill と unslop で起草・改訂する。 |
+| `figure-it-out` | より狭いプレイブックが当てはまらないときの、監査可能なプレイブックを設計する。大規模な移行、野心的な複数部の変更、人が離れたあとレビューする作業が対象。厳密さをタスクに合わせ、仮説ループを回し、決定を記録する。 /figure-it-out や「figure it out」で使う。 |
 
 ### 作業の進め方
 
 | スキル | 説明 |
 | --- | --- |
-| `architect` | Sketch types, signatures, and module structure before code, then stay in the loop while implementation fills in. Use for /architect, 'architect this', 'design this', or non-trivial work where jumping to code would lock in the wrong shape. |
-| `arena` | Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. Use for /arena, 'arena this', 'throw it in the arena', or when one attempt at a non-trivial artifact would lock in the wrong shape. |
-| `swarm` | Fan out N parallel workers, drain them, and return one report. Use for /swarm, 'swarm this', or parallel coverage, races, gauntlets, and exploration. |
-| `interrogate` | Use for "interrogate", "adversarial review", "multi-model review", "challenge this", "stress test this code", "find blind spots", or "tear this apart". Adversaries try to break a change or design, and only findings proven by a run survive. |
-| `correct` | Find the mistakes agents keep repeating in this repo and make each one impossible. Try architecture first, then types, then a lint whose error names the fix, then a test, and write docs last. Prove each check fails on a real past mistake. Repeat this each time the operator corrects you. Use for /correct. |
-| `tdd` | Use only when the user explicitly asks for TDD, a failing test, or a regression test, OR when the bug has an obvious cheap local test target. Skip when the test path is unclear, expensive, integration-heavy, or not requested. |
-| `sharpen` | Make a task deeper, not bigger, then rewrite the prompt. Use for /sharpen. |
-| `no-comments` | Spawn Comment Sicko, fix accepted findings, and offer encodings for claimed constraints. |
-| `reflect` | Spawn three parallel review subagents over the active transcript, surface learnings, and route each to a concrete edit on an existing skill. Use when the user says reflect. |
-| `show-me-your-work` | Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, result). Local by default; commit it when a reviewer needs the trail to trust the result. Use for /show-me-your-work, autonomous or multi-phase runs, or work a human reviews after stepping away. |
+| `architect` | コードを書く前に型、シグネチャ、モジュール構成を設計し、実装が埋まっていく間も設計側に留まる。/architect、「これ設計して」、いきなりコードに行くと形を誤る非自明な仕事に使う。 |
+| `arena` | 同じタスクに N 個の候補並走させ、ベースを選んで、負けた候補の強い部分を接ぎ木する。/arena、「arena にかけて」など、1回の試作で形を確定させられない非自明な成果物に使う。 |
+| `swarm` | N 個のワーカに並列で振って回収し、1本のレポートにまとめる。/swarm、「swarm して」、並列カバレッジ、レース、一斉検証、探索に使う。 |
+| `interrogate` | 敵対レビュー。敵対者が変更か設計を壊しにいき、実行で証明された指摘だけが生き残る。「interrogate」「adversarial review」「challenge this」「盲点を見つけて」などに使う。 |
+| `correct` | このリポジトリでエージェントが繰り返す間違いを見つけ、それぞれ起きないようにする。 architecture → 型 → エラー文言で修正箇所が分かる lint → テスト の順に試し、ドキュメントは最後。過去の実際の間違えで各検査が失敗することを証明する。オペレーターに訂正されるたび繰り返す。/correct で使う。 |
+| `tdd` | ユーザーが TDD・失敗するテスト・リグレッションテストを明示的に頼んだか、バグに安くて局所的なテスト対象がはっきりあるときだけ使う。テスト経路が不明、コストが高い、統合寄り、依頼されていないときは使わない。 |
+| `sharpen` | タスクを大きくではなく深くし、プロンプトを書き直す。/sharpen で使う。 |
+| `no-comments` | Comment Sicko を呼び、承認済みの指摘を直し、主張された制約の符号化案を提示する。 |
+| `reflect` | アクティブなトランスクリプトに対して 3 個のレビューサブエージェントを並列に走らせ、学びを表面化させ、既存スキルへの具体的な編集に振り向ける。ユーザーが reflect と言ったときに使う。 |
+| `show-me-your-work` | 長時間作業や非同期作業で、レビュー可能な決定の軌跡を残す。決定ごとに 1 行の TSV ログ（何を、なぜ、根拠、結果）。既定はローカルで、レビュー側が結果を信じるために軌跡を必要とするならコミットする。/show-me-your-work、自律・複数フェーズの実行、人が離れたあとレビューする作業に使う。 |
 
 ### 調査・説明・状況把握
 
 | スキル | 説明 |
 | --- | --- |
-| `how` | Use for "how does X work", code walkthroughs before changing something, and placement / ownership / layering questions ("where should this live", "which package owns this", "is this the right layer"). Explains subsystem architecture, runtime flow, onboarding mental models. Use why for motivation. |
-| `why` | Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, issue tracker, long-form docs, real-time chat, infrastructure observability, error tracking, product analytics warehouse) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior. |
-| `teach` | Explain a body of work plainly so a person actually understands it. Runs the `how` and `why` skills and weaves what they find into one clear explanation. Use for 'teach me this', 'help me really understand X', 'explain this change or subsystem to me'. |
-| `recall` | Reconstruct your recent working context from your own chat history, live state, and the shared record (user reports, prior fixes, incidents), then hand back a tight current-state brief. Use for 'recall my work on X', 'catch me up', 'what have I been working on', 'where did I leave off', before starting or resuming work. |
-| `ketchup` | Catch the user up on what changed in this chat since their last message, in plain words and small visuals. List every item waiting on them with what they need to decide it from the reply alone. Use for /ketchup. |
-| `ketchup-video` | Catch the user up like /ketchup, with a short subtitled video of slides for what happened and the waiting calls as text under it. Use for /ketchup-video. |
-| `bro` | Restate the last message in plain human language, with no jargon. |
-| `in-your-own-words` | Restate in your own words what you think the user's goals are and what problem they're trying to solve. Use for /in-your-own-words. |
+| `how` | 「X はどう動くか」、変更前のコード読み解き、「どこに置くべきか、どのパッケージが所有するか、レイヤーは正しいか」といった配置・所有・層の質問に使う。サブシステム構成、実行フロー、オンボーディングの心像を説明する。意図や動機は why を使う。 |
+| `why` | 「なぜ X はこの方式か」「なぜ Y を選んだか」、設計上の判断の根拠、リグレッション、postmortem、データで裏づけた閾値に使う。使える MCP を発見し、証拠カテゴリ（ソース管理、issue 管理、長文ドキュメント、リアルタイムのチャット、基盤の観測性、エラー追跡、プロダクト分析のウェアハウス）を並列に照会し、決定とトレードオフへ出典付きの見解を返す。実行時の挙動は how を使う。 |
+| `teach` | ある作業のまとまりを、人が実際に分かるレベルまで平易に説明する。how と why を走らせ、得られた内容を1本の明確な説明に編み込む。「これ教えて」「X を本当に理解したい」「この変更・サブシステムを説明して」に使う。 |
+| `recall` | 自分のチャット履歴、稼働中の状態、共有された記録（ユーザーの報告、過去の修正、インシデント）から直近の作業文脈を再構成し、今の状態の簡潔なブリーフを返す。「X の作業を思い出して」「状況を戻して」「どこまで進めていたか」など、作業を始める・再開する前に使う。 |
+| `ketchup` | ユーザーの最後のメッセージ以降にこのチャットで何が変わったかを、平易な言葉と小さな図で伝える。ユーザーの判断を待つ項目を、その返答だけで判断できる形で全件並べる。/ketchup で使う。 |
+| `ketchup-video` | /ketchup 相当を、短字幕つきのスライド動画と、判断待ち項目のテキスト添えで伝える。/ketchup-video で使う。 |
+| `bro` | 直前のメッセージを、専門語なしの平易な人間の言葉で言い直す。 |
+| `in-your-own-words` | ユーザーの目標だと思うことと、解こうとしている問題について、自分の言葉で言い直す。/in-your-own-words で使う。 |
 
 ### 検証
 
 | スキル | 説明 |
 | --- | --- |
-| `benchmark-checklist` | Vet a perf measurement (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use when you run a benchmark or report a speedup or regression you measured. |
-| `blast-radius` | Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use for 'blast radius of X', 'what could this break', or reviewing a small diff you don't trust. |
-| `statechart` | Check a TLA+ model of a system that moves between states, such as a product flow, a protocol, or a service, and draw it as a Mermaid statechart. The report gives the shortest path to each state that breaks a rule. Use for /statechart, or to show a bug as a path through states. |
-| `create-formal-verification-skill` | Generate a project-local skill that formally verifies the code where a bug costs the most and tests reach the least, in any language, with whichever verification tool fits. Use for /create-formal-verification-skill, "model-check this race", "prove this invariant", or when concurrency, retries, state machines, parsers, or unsafe code need more than tests. |
-| `maintain-formal-verification-skill` | Bring a project's formal verification back in line with the code after the code changes: find the commits that touched verified code, update the model, harness, or properties to describe the code as it is now, rerun, and say whether each failure is drift in the verification or a bug in the code. Use for /maintain-formal-verification-skill, "is the model still true to the code", or after merges and refactors that touched verified code without rechecking it. |
-| `create-verification-skill` | Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform. Use for /create-verification-skill, "make a control skill for this repo", or when a project has no scripted way to prove UI/CLI/service behavior. |
-| `maintain-verification-skill` | Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live session driving every feature, at most one PR of proven corrections. Use for /maintain-verification-skill or "audit the verify skill". |
+| `benchmark-checklist` | ベンチマークや、自分で測った高速化・リグレッションを報告するか、それに基づく判断をする前に、測定を精査する（律速要因、チューニング、制限、エラー、再現性、関連性、作業が実際に行われたか）。測定を走らせたか報告するときに使う。 |
+| `blast-radius` | 変更がリリース前に、diff の外を含めて他所で何を壊しうるかを探し、壊れない根拠の事実 1 個を、文章ではなく実際のコードを実行して証明する。「X の blast radius」「これは何を壊しうるか」信用できない小さな diff のレビューに使う。 |
+| `statechart` | 状態を遷移するシステム（プロダクトフロー、プロトコル、サービスなど）の TLA+ モデルを検査し、Mermaid の状態図として描く。レポートは、ルールを壊す状態への最短経路を提示する。/statechart、バグを状態への経路として示すのに使う。 |
+| `create-formal-verification-skill` | バグの代价が最も大きくテストが届かないコードを、形式検証するプロジェクトローカルのスキルを生成する。言語を問わず、合う検証ツールを選ぶ。/create-formal-verification-skill、「この競合を model-check して」「この不変条件を証明して」、並行性・リトライ・ステートマシン・パーサ・unsafe コードがテスト以上を必要とするときに使う。 |
+| `maintain-formal-verification-skill` | コード変更後に、プロジェクトの形式検証をコードと再び一致させる。検証済みコードに触れたコミットを見つけ、モデル・ハーネス・性質を今のコードの説明へ更新し、再実行し、各失敗が検証側のドリフトかコードのバグかを述べる。/maintain-formal-verification-skill、「モデルはまだコードに忠実か」、検証済みコードに触れたマージ・リファクタのあとに使う。 |
+| `create-verification-skill` | ユーザーと同じ動かし方でアプリを操作する、プロジェクトローカルの検証スキルを生成する。言語・フレームワーク・プラットフォームを問わない。/create-verification-skill、「このリポジトリの control スキルを作って」、UI/CLI/サービスの挙動を実証するスクリプト化された手段がないプロジェクトに使う。 |
+| `maintain-verification-skill` | プロジェクトの検証スキルと feature map を健全に保つ定期的な点検。feature ごとの並列ソースリーダー、全 feature を実際に動かす 1 本のセッション、証明済みの修正だけで最大 1 PR。/maintain-verification-skill や「verify skill を監査して」に使う。 |
 
 ### 文章・言語
 
 | スキル | 説明 |
 | --- | --- |
-| `technical-writing` | Layered technical-writing standard: Diátaxis structure, Google developer style sentences, STE instruction rules, Global English syntax. Use for /technical-writing or when writing or reviewing docs, RFCs, readmes, PR descriptions, or commit messages. |
-| `unslop` | Cut AI tells from any writing. |
-| `typescript-best-practices` | TypeScript best practices. Use when reading or editing any .ts or .tsx file. |
+| `technical-writing` | 層構造の技術文書標準。Diátaxis の構成、Google 開発者スタイルの文、STE の手順文書規則、Global English の構文。/technical-writing、ドキュメント・RFC・README・PR 説明・コミットメッセージの執筆やレビューに使う。 |
+| `unslop` | あらゆる文章から AI の癖を削る。 |
+| `typescript-best-practices` | TypeScript のベストプラクティス。.ts と .tsx ファイルを読む・編集するときに使う。 |
 
 ### その他
 
 | スキル | 説明 |
 | --- | --- |
-| `make-bot-ui` | Use when building a custom UI (page, dashboard, buttons) that should wake a Grok Bot over a webhook, when the user must provide a webhook sender key, or when exposing that UI on Tailscale. |
+| `make-bot-ui` | webhook 経由で Grok Bot を起こすカスタム UI（ページ、ダッシュボード、ボタン）を構築するとき、ユーザーが webhook 送信者のキーを渡すべきとき、その UI を Tailscale 上に公開ときに使う。 |
 
 ### 原則（`principle-*` 24 本）
 
@@ -125,30 +126,30 @@ Cursor 専用のセットアップスキル `setup-pstack` は同梱しますが
 
 | スキル | 説明 |
 | --- | --- |
-| `principle-attack-the-premise` | Apply when two or more fixes that share one premise have failed the same gate. Write the premise down and test it directly before you write another fix that assumes it. |
-| `principle-boundary-discipline` | Apply when wiring validation, error handling, or framework adapters. Concentrate guards at system boundaries (CLI, config, network, external APIs); trust internal types and keep business logic in pure functions. |
-| `principle-build-the-lever` | Apply to any non-trivial work, not just bulk work: edits, migrations, analyses, checks. Build the tool that does it or proves it (codemod, script, generator, or a skill your subagents follow) instead of working by hand. The tool is the artifact a reviewer can rerun. |
-| `principle-encode-lessons-in-structure` | Apply when you catch yourself writing the same instruction a second time, or notice a recurring correction. Encode the rule as a lint, metadata flag, runtime check, or script instead of more text. |
-| `principle-exhaust-the-design-space` | Apply when facing a novel UI interaction or architectural decision with no precedent in the codebase. Build 2-3 competing prototypes and compare side by side before committing. |
-| `principle-experience-first` | Apply when product, UX, or feature-scope tradeoffs come up. Choose user delight over implementation convenience; ship fewer polished features over more rough ones. |
-| `principle-explain-the-number` | Apply before you measure, and before you trust, report, or act on a number you measured: a speedup, a regression, a throughput, a latency, or an eval result. Find what limits it, and rule out that it measured something other than the work you think. |
-| `principle-fix-root-causes` | Apply when debugging. Trace each symptom back to the first place the system went wrong and fix it there. A guard is a fix only when the state it handles is legitimate. |
-| `principle-foundational-thinking` | Apply before writing logic: choosing core types and data structures, sequencing scaffold-vs-feature work, asking what concurrent actors share. Get the data structures right so downstream code becomes obvious. |
-| `principle-guard-the-context-window` | Apply when context is filling up: large outputs, long files, repeated reads, fan-out planning. Route bulk to subagents; keep summaries in the main thread, not raw payloads. |
-| `principle-laziness-protocol` | Apply when refactoring, evaluating diff size, or tempted to add abstractions, layers, or signal threading. Bias toward deletion and the smallest change that solves the problem. |
-| `principle-make-operations-idempotent` | Apply when designing commands, lifecycle steps, or processing loops that run amid crashes, restarts, and retries. Converge to the same end state regardless of partial prior runs. |
-| `principle-migrate-callers-then-delete-legacy-apis` | Apply when introducing a new internal API while old callers still exist. Migrate callers and delete the old API in the same wave instead of preserving compatibility layers. |
-| `principle-minimize-reader-load` | Apply when reviewing or shaping code that's hard to trace. Count layers between question and answer, and hidden state in the reader's head; collapse one-caller wrappers and shrink mutable scope. |
-| `principle-model-the-domain` | Apply when writing stateful logic, or when code branches a lot or repeats a shape assumption across files. |
-| `principle-never-block-on-the-human` | Apply when tempted to ask 'should I do X?' on reversible work. |
-| `principle-outcome-oriented-execution` | Apply during planned rewrites and migrations with explicit phase boundaries. Converge on the target architecture; don't preserve smooth intermediate states with throwaway compatibility code. |
-| `principle-prove-it-works` | Apply after completing a task, before declaring done. Verify against the real artifact (run the feature, read the actual value, inspect the diff), not a proxy, self-report, or 'it compiles.' |
-| `principle-redesign-from-first-principles` | Apply when integrating a new requirement into an existing design. |
-| `principle-separate-before-serializing-shared-state` | Apply when concurrent actors might write to the same file, branch, key, or state object. Eliminate the sharing first; serialize structurally only when one shared writer is a real invariant. |
-| `principle-sequence-verifiable-units` | Apply to multi-step work (sweeps, migrations, runs of similar edits) and to how you stack commits and PRs. Break work into small units that each end in a verifiable state, check each before the next, and order delivery so the sequence proves itself to a reviewer. |
-| `principle-subtract-before-you-add` | Apply when sequencing an addition, refactor, or rewrite. Remove dead code, redundant validators, and stub references first, then build on the simpler base. |
-| `principle-test-behavior-not-implementation` | Apply when you write, change, or keep a test. Assert what the code's users can observe, so that the test fails when that behavior breaks and keeps passing when only the internals change. |
-| `principle-type-system-discipline` | Apply when designing types, reviewing a function signature, or writing code in any statically-typed language. Make illegal states unrepresentable, brand semantic primitives, parse external data at boundaries, exhaust variants, derive from authoritative schemas. |
+| `principle-attack-the-premise` | 同じ前提を共有する修正が 2 つ以上同じ関門で失敗したら使う。前提を書き下ろし、それを仮定した別の修正を書く前に、前提そのものを直接検証する。 |
+| `principle-boundary-discipline` | バリデーション、エラー処理、フレームワークアダプタを配線するとき使う。ガードはシステム境界（CLI、設定、ネットワーク、外部 API）に集中し、内部の型は信頼し、ビジネスロジックは純関数に置く。 |
+| `principle-build-the-lever` | 大量の作業だけでなく、編集・移行・分析・検査など非自明な仕事すべてに使う。手作業でこなす代わりに、それをやるか証明する道具（codemod、スクリプト、ジェネレーター、サブエージェントが従うスキル）を作る。道具はレビュアーが再実行できる成果物である。 |
+| `principle-encode-lessons-in-structure` | 同じ指示を2度目に書いている自分に気づいたか、繰り返しの訂正に気づいたら使う。テキストを増やす代わりに、lint・メタデータフラグ・実行時チェック・スクリプトとしてルールを符号化する。 |
+| `principle-exhaust-the-design-space` | コードベースに前例のない新しい UI インタラクションやアーキテクチャ判断に向き合ったとき使う。競合するプロトタイプを 2〜3 個作り、並べて比較してから決める。 |
+| `principle-experience-first` | プロダクト、UX、機能範囲のトレードオフが出たら使う。実装のしやすさよりユーザーの喜びを選ぶ。粗いものを多くより、磨いたものを少なく出す。 |
+| `principle-explain-the-number` | 測る前に、そして測った数値（高速化、リグレッション、スループット、遅延、eval 結果）を信じる・報告する・行動する前に使う。何を律速しているかを探し、その測定が想定した作業以外を測っていないことを除外する。 |
+| `principle-fix-root-causes` | デバッグするとき使う。各症状を、システムが最初に誤った場所まで遡ってそこを直す。ガードは、扱う状態が正当なときだけ修正になる。 |
+| `principle-foundational-thinking` | ロジックを書く前に使う。コアの型とデータ構造を選ぶ、足場と機能の実装順を決める、並行アクターが何を共有するか問う。データ構造を正しく取れば、後続のコードは自明になる。 |
+| `principle-guard-the-context-window` | コンテキストが埋まりつつあるとき使う（大きな出力、長いファイル、繰り返し読み、fan-out 計画）。大量の出力はサブエージェントに流し、メインスレッドに置くのは生のペイロードでなく要約にする。 |
+| `principle-laziness-protocol` | リファクタリング、diff サイズの評価、抽象化・層・シグナルスレディングを足したくなるときに使う。削除と、問題を解く最小の変更へ寄せた判断にする。 |
+| `principle-make-operations-idempotent` | クラッシュ、再起動、リトライの中で走るコマンド、ライフサイクル手順、処理ループを設計するとき使う。途中までの実行があっても、同じ終状態に収束させる。 |
+| `principle-migrate-callers-then-delete-legacy-apis` | 新しい内部 API を導入したが古い呼び出し元が残るとき使う。互換レイヤーを残すのではなく、同じウェーブで呼び出し元を移行し古い API を削除する。 |
+| `principle-minimize-reader-load` | 追跡が難しいコードのレビューや形作りで使う。質問と回答の間の層の数と、読者の頭の中の隠れた状態を数える。呼び出し元が 1 つのラッパーは畳み、可変スコープを縮める。 |
+| `principle-model-the-domain` | 状態を持つロジックを書するとき、コードの分岐が多いか、形の仮定を複数ファイルで繰り返しているときに使う。 |
+| `principle-never-block-on-the-human` | 可逆な作業で「X をしてよいですか？」と聞きたくなったら使う。 |
+| `principle-outcome-oriented-execution` | フェーズ境界が明確な計画的な書き直し・移行で使う。狙いのアーキテクチャに収束させ、使い捨ての互換コードで滑らかな中間状態を残さない。 |
+| `principle-prove-it-works` | タスクを完了したあと、完了を宣言する前に使う。代理手段・自己申告・「ビルドは通った」ではなく、実物に対して検証する（機能を動かし、実値を読み、diff を見る）。 |
+| `principle-redesign-from-first-principles` | 既存の設計へ新しい要求を組み込むとき使う。 |
+| `principle-separate-before-serializing-shared-state` | 並行アクターが同じファイル・ブランチ・キー・状態オブジェクトに書き込むかもしれないとき使う。まず共有を解消し、単一ライターが本当の不変条件であるときだけ、構造による直列化で受け止める。 |
+| `principle-sequence-verifiable-units` | 多段の作業（一括編集、移行、同種編集の連続）と、コミット・PR の積み方に使う。レビュー可能な終状態で終わる小さな単位へ分解し、次へ進む前に各自確認し、順序そのものがレビュアーへの証明になる並びで出荷する。 |
+| `principle-subtract-before-you-add` | 追加・リファクタ・書き直しの順序を組み立てるとき使う。死んだコード、冗重な検証、スタブ参照を先に消し、シンプルな基盤の上に構築する。 |
+| `principle-test-behavior-not-implementation` | テストを書く・変える・残すとき使う。コードのユーザーが観察できるものをアサートする。挙動が壊れたら失敗し、内部だけ変わったときは通るテストにする。 |
+| `principle-type-system-discipline` | 型を設計するとき、関数シグネチャをレビューするとき、静的型付き言語でコードを書るとき使う。不正な状態を表現不能にし、意味的なプリミティブにブランドを付け、外部データは境界で解析し、variant を網羅し、信頼できるスキーマから導く。 |
 
 ## モデル自動発火（オプトイン）
 
