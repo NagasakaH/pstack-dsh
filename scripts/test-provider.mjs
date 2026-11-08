@@ -89,6 +89,32 @@ for (const c of candidates) {
 // 9) 存在しない locator は undefined
 assert.equal(await registered.get({ ...poteto, locator: fileURLToPath(new URL('./nope/SKILL.md', import.meta.url)) }, {}), undefined);
 
+// 10) config.modelInvocable の上書き（既定は上流設計どおり 0 本）
+{
+  const load = async (modelInvocable) => {
+    const warns = [];
+    let provider;
+    await apply(
+      { skills: { registerProvider: (fn) => { provider = fn({}); } }, logger: { warn: (m) => warns.push(m) } },
+      { modelInvocable },
+    );
+    return { list: await provider.list({}), warns };
+  };
+  const on = (list) => list.filter((c) => c.invocation.modelInvocable).map((c) => c.name);
+  assert.deepEqual(on((await load(undefined)).list), [], '既定: モデル発火 0 本');
+  assert.equal(on((await load(true)).list).length, candidates.length, 'true: 全スキル発火可能');
+  assert.equal(on((await load(['principle-*'])).list).length, 24, '前方一致: principle-* 24 本');
+  assert.deepEqual(on((await load(['unslop', 'how'])).list).sort(), ['how', 'unslop'], '完全一致リスト');
+  const bad = await load(42);
+  assert.equal(on(bad.list).length, 0, '不正値: 発火なし');
+  assert.equal(bad.warns.length, 1, '不正値: 警告 1 件');
+  // 上書きが get() の definition にも伝播すること
+  let provider;
+  await apply({ skills: { registerProvider: (fn) => { provider = fn({}); } } }, { modelInvocable: true });
+  const def2 = await provider.get((await provider.list({})).find((c) => c.name === 'poteto-mode'), {});
+  assert.equal(def2.invocation.modelInvocable, true, 'get() に上書きが伝播');
+}
+
 if (warnings.length) {
   console.log('warnings:');
   for (const w of warnings) console.log('  -', w);

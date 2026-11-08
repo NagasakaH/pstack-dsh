@@ -9,7 +9,7 @@
 | --- | --- |
 | `plugin.json` / `.cursor-plugin/plugin.json` | `package.json`（`dsh.bundle.patch`）+ `cordis.patch.yml`（Loader 行 `pstack-skills`） |
 | `skills/`（スキャン roots） | `lib/index.js` が `ctx.skills.registerProvider` で provider `pstack`（rank 600・source `bundled`）として提供。first-party の `dsh-skill-office` と同型 |
-| frontmatter `disable-model-invocation` / `user-invocable` | 同名キーを DSH と同じ意味で解釈（`true/yes/on/1`・`false/no/off/0`）。DSH 側ではスラッシュ起動専用のスキルになる |
+| frontmatter `disable-model-invocation` / `user-invocable` | 同名キーを DSH と同じ意味で解釈（`true/yes/on/1`・`false/no/off/0`）。既定ではスラッシュ起動専用のスキルになる。`pstack-skills` の config `modelInvocable: true \| 名前配列` で上書き可能（frontmatter は触らず list() 段で反転。README のトークンコスト表参照） |
 | frontmatter `icon` / `color` | DSH に相当なし。パースで無視（警告も出さない） |
 | `agents/*.md`（Task で spawn するサブエージェント定義） | DSH はディスク上のエージェント定義を自動発見しない。`subagent` ツールに渡すプロンプト本文として使う（下記） |
 | Benny 自動化（`automations/benny`） | Cursor の自動化基盤専用。参考資料として同梱するだけ（スキル登録しない） |
