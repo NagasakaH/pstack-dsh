@@ -100,7 +100,7 @@ pstack のスキルは上流どおり全 57 本が `disable-model-invocation: tr
 | `benchmark-checklist` | ベンチマークや、自分で測った高速化・リグレッションを報告するか、それに基づく判断をする前に、測定を精査する（律速要因、チューニング、制限、エラー、再現性、関連性、作業が実際に行われたか）。測定を走らせたか報告するときに使う。 |
 | `blast-radius` | 変更がリリース前に、diff の外を含めて他所で何を壊しうるかを探し、壊れない根拠の事実 1 個を、文章ではなく実際のコードを実行して証明する。「X の blast radius」「これは何を壊しうるか」信用できない小さな diff のレビューに使う。 |
 | `statechart` | 状態を遷移するシステム（プロダクトフロー、プロトコル、サービスなど）の TLA+ モデルを検査し、Mermaid の状態図として描く。レポートは、ルールを壊す状態への最短経路を提示する。/statechart、バグを状態への経路として示すのに使う。 |
-| `create-formal-verification-skill` | バグの代价が最も大きくテストが届かないコードを、形式検証するプロジェクトローカルのスキルを生成する。言語を問わず、合う検証ツールを選ぶ。/create-formal-verification-skill、「この競合を model-check して」「この不変条件を証明して」、並行性・リトライ・ステートマシン・パーサ・unsafe コードがテスト以上を必要とするときに使う。 |
+| `create-formal-verification-skill` | バグの代価が最も大きくテストが届かないコードを、形式検証するプロジェクトローカルのスキルを生成する。言語を問わず、合う検証ツールを選ぶ。/create-formal-verification-skill、「この競合を model-check して」「この不変条件を証明して」、並行性・リトライ・ステートマシン・パーサ・unsafe コードがテスト以上を必要とするときに使う。 |
 | `maintain-formal-verification-skill` | コード変更後に、プロジェクトの形式検証をコードと再び一致させる。検証済みコードに触れたコミットを見つけ、モデル・ハーネス・性質を今のコードの説明へ更新し、再実行し、各失敗が検証側のドリフトかコードのバグかを述べる。/maintain-formal-verification-skill、「モデルはまだコードに忠実か」、検証済みコードに触れたマージ・リファクタのあとに使う。 |
 | `create-verification-skill` | ユーザーと同じ動かし方でアプリを操作する、プロジェクトローカルの検証スキルを生成する。言語・フレームワーク・プラットフォームを問わない。/create-verification-skill、「このリポジトリの control スキルを作って」、UI/CLI/サービスの挙動を実証するスクリプト化された手段がないプロジェクトに使う。 |
 | `maintain-verification-skill` | プロジェクトの検証スキルと feature map を健全に保つ定期的な点検。feature ごとの並列ソースリーダー、全 feature を実際に動かす 1 本のセッション、証明済みの修正だけで最大 1 PR。/maintain-verification-skill や「verify skill を監査して」に使う。 |
